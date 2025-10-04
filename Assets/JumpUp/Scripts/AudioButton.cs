@@ -1,44 +1,57 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AudioButton : MonoBehaviour
 {
-    public bool efx;
-    public Sprite musicOnSprite, musicOffSprite, efxOnSprite, efxOffSprite;
-    public Image spriteButton;
+    public bool _isEfx;
+    public Sprite _musicOnSpriteAsset, _musicOffSpriteAsset, _efxOnSpriteAsset, _efxOffSpriteAsset;
+    public Image _spriteButtonImage;
 
 
     //set button sprite
     void Start()
     {
-        SetButton();
+        SetButtonSpriteDisplay();
     }
 
-    public void MusicButtonClicked()
+    void OnEnable()
     {
-        AudioManager.Instance.MuteMusic();
-        AudioManager.Instance.PlayEffects(AudioManager.Instance.buttonClick);
-        SetButton();
+        StartCoroutine(RefreshNextFrame());
     }
 
-    public void EfxButtonClicked()
+    IEnumerator RefreshNextFrame()
     {
-        AudioManager.Instance.MuteEfx();
-        AudioManager.Instance.PlayEffects(AudioManager.Instance.buttonClick);
-        SetButton();
+        yield return null;
+        SetButtonSpriteDisplay();
     }
 
-    void SetButton()
+    public void OnMusicButtonClicked()
     {
-        if ((!AudioManager.Instance.IsMusicMute() && !efx) || (!AudioManager.Instance.IsEfxMute() && efx))
-            if (efx)
-                spriteButton.sprite = efxOnSprite;
+        AudioManager.S_Instance.MuteMusicEffect();
+        AudioManager.S_Instance.PlayEffectsAudio(AudioManager.S_Instance.ButtonClickAudio);
+        SetButtonSpriteDisplay();
+    }
+
+    public void OnEfxButtonClicked()
+    {
+        AudioManager.S_Instance.MuteEfx();
+        AudioManager.S_Instance.PlayEffectsAudio(AudioManager.S_Instance.ButtonClickAudio);
+        SetButtonSpriteDisplay();
+    }
+
+    void SetButtonSpriteDisplay()
+    {
+        if ((!AudioManager.S_Instance.IsMusicMuted() && !_isEfx) || (!AudioManager.S_Instance.IsEfxMuted() && _isEfx))
+            if (_isEfx)
+                _spriteButtonImage.sprite = _efxOnSpriteAsset;
             else
-                spriteButton.sprite = musicOnSprite;
+                _spriteButtonImage.sprite = _musicOnSpriteAsset;
         else
-            if (efx)
-                spriteButton.sprite = efxOffSprite;
-            else
-                spriteButton.sprite = musicOffSprite;
+            if (_isEfx)
+            _spriteButtonImage.sprite = _efxOffSpriteAsset;
+        else
+            _spriteButtonImage.sprite = _musicOffSpriteAsset;
     }
 }

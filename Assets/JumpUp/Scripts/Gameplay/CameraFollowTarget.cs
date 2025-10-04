@@ -3,48 +3,44 @@
 public class CameraFollowTarget : MonoBehaviour
 {
     [Header("Object to follow")]
-    public GameObject TargetYFollow;
+    public GameObject TargetYFollowGameObject;
     //public GameObject TargetXFollow;
 
     [Header("Follow speed")]
     [Range(0.0f, 50.0f)]
-    public float speed = 6f;
+    public float SpeedConfig = 6f;
 
     [Header("Camera Offset")]
     [Range(-10.0f, 10.0f)]
-    public float yOffset;
+    public float YOffsetConfig = 2f;
     //[Range(-10.0f, 10.0f)]
     //public float xOffset;
 
     [Space(15)]
-    public UIManager uIManager;
+    public UIManager UIManagerInstance;
 
-    float interpolation;
-    Vector3 position;
-
-    void Start()
-    {
-    }
+    float _interpolationVar;
+    Vector3 _positionVector3;
 
     //camera follow the player
     void LateUpdate()
     {
-        if (uIManager.gameState == GameStateEnum.RUNNING)
+        if (UIManagerInstance.GameStateEnum == GameStateEnum.RUNNING)
         {
-            interpolation = speed * Time.deltaTime;
+            _interpolationVar = SpeedConfig * Time.deltaTime;
 
-            position = transform.position;
+            _positionVector3 = transform.position;
 
-            if (TargetYFollow.transform.position.y + yOffset > transform.position.y)
-                position.y = Mathf.Lerp(transform.position.y, TargetYFollow.transform.position.y + yOffset, interpolation);
+            if (TargetYFollowGameObject.transform.position.y + YOffsetConfig > transform.position.y)
+                _positionVector3.y = Mathf.Lerp(transform.position.y, TargetYFollowGameObject.transform.position.y + YOffsetConfig, _interpolationVar);
             //position.x = Mathf.Lerp(transform.position.x, TargetXFollow.transform.position.x + xOffset, interpolation);
 
-            transform.position = position;
+            transform.position = _positionVector3;
         }
     }
 
     //reset camera position
-    public void ResetCameraPosition()
+    public void ResetTheCameraPosition()
     {
         transform.position = new Vector3(0, 0, -10);
     }

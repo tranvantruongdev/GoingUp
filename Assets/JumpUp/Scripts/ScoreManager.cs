@@ -1,16 +1,17 @@
 ﻿using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; set; }
-    public Text currentScoreLabel, highScoreLabel, currentScoreGameOverLabel, highScoreGameOverLabel;
+    public Text _currentScoreText, _highScoreText, _currentScoreGameOverText, _highScoreGameOverText;
 
-    public float currentScore, highScore;
+    public float CurrentScoreCounter, HighScoreCounter;
     // Start is called before the first frame update
 
-    bool counting;
+    bool _isCounting;
 
     void Awake()
     {
@@ -28,73 +29,73 @@ public class ScoreManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("HighScore"))
             PlayerPrefs.SetFloat("HighScore", 0);
 
-        highScore = PlayerPrefs.GetFloat("HighScore");
+        HighScoreCounter = PlayerPrefs.GetFloat("HighScore");
 
-        UpdateHighScore();
-        ResetCurrentScore();
+        UpdateTheHighScore();
+        ResetTheCurrentScoreValue();
     }
 
     //save and update highscore
-    void UpdateHighScore()
+    void UpdateTheHighScore()
     {
-        if (currentScore > highScore)
-            highScore = currentScore;
+        if (CurrentScoreCounter > HighScoreCounter)
+            HighScoreCounter = CurrentScoreCounter;
 
-        highScoreLabel.text = highScore.ToString("F1");
-        PlayerPrefs.SetFloat("HighScore", highScore);
+        _highScoreText.text = HighScoreCounter.ToString("F1");
+        PlayerPrefs.SetFloat("HighScore", HighScoreCounter);
     }
 
     //update currentscore
-    public void UpdateScore(int value)
+    public void UpdateScoreValue(int value)
     {
-        currentScore += value;
-        Round(currentScore, 1);
-        currentScoreLabel.text = currentScore.ToString("F1");
+        CurrentScoreCounter += value;
+        RoundInputValueWithDigits(CurrentScoreCounter, 1);
+        _currentScoreText.text = CurrentScoreCounter.ToString("F1");
     }
 
     //reset current score
-    public void ResetCurrentScore()
+    public void ResetTheCurrentScoreValue()
     {
-        currentScore = 0;
-        UpdateScore(0);
+        CurrentScoreCounter = 0;
+        UpdateScoreValue(0);
     }
 
     //update gameover scores
     public void UpdateScoreGameover()
     {
-        UpdateHighScore();
+        UpdateTheHighScore();
 
-        currentScoreGameOverLabel.text = currentScore.ToString("F1");
-        highScoreGameOverLabel.text = highScore.ToString("F1");
+        _currentScoreGameOverText.text = CurrentScoreCounter.ToString("F1");
+        _highScoreGameOverText.text = HighScoreCounter.ToString("F1");
     }
 
-    public void StartCounting()
+    public void StartCountingCouroutine()
     {
-        counting = true;
-        StartCoroutine(Counter());
+        _isCounting = true;
+        StartCoroutine(Countering());
     }
 
-    public void StopCounting()
+    public void StopCountingCouroutine()
     {
-        counting = false;
-        StopCoroutine(Counter());
+        _isCounting = false;
+        StopCoroutine(Countering());
     }
 
-    IEnumerator Counter()
+    IEnumerator Countering()
     {
-        while (counting)
+        while (_isCounting)
         {
-            currentScore += .1f;
-            Round(currentScore, 1);
-            currentScoreLabel.text = currentScore.ToString("F1");
+            CurrentScoreCounter += .1f;
+            RoundInputValueWithDigits(CurrentScoreCounter, 1);
+            _currentScoreText.text = CurrentScoreCounter.ToString("F1");
             yield return new WaitForSeconds(.1f);
         }
     }
 
     //round on 1 decimal, because sometimes float get more than one decimal
-    public float Round(float value, int digits)
+    public float RoundInputValueWithDigits(float input, int digits)
     {
-        float mult = Mathf.Pow(10.0f, (float)digits);
-        return Mathf.Round(value * mult) / mult;
+        float result = Mathf.Pow(10.0f, digits);
+        return Mathf.Round(input * result) / result;
     }
 }

@@ -1,100 +1,119 @@
 ﻿using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
-
-    public static AudioManager Instance = null;
+public class AudioManager : MonoBehaviour
+{
+    public static AudioManager S_Instance = null;
 
     [Header ("Audio Sources")]
-    public AudioSource efxSource;
-    public AudioSource musicSource;
+    public AudioSource EfxAudioSource;
+    public AudioSource MusicAudioSource;
 
     [Header ("Background Music")]
-    public AudioClip menuMusic;
-    public AudioClip gameMusic;
+    public AudioClip MenuMusicAudio;
+    public AudioClip GameMusicAudio;
 
     [Header("Sound Effects")]
-    public AudioClip buttonClick;
-    public AudioClip gameOver;
-    public AudioClip jump;
+    public AudioClip ButtonClickAudio;
+    public AudioClip JumpAudio;
+    public AudioClip GameOverAudio;
 
-    private bool muteMusic;
-    private bool muteEfx;
+    private bool _isMuteMusic;
+    private bool _isMuteEfx;
+    private AudioClip _lastRequestedMusicAudio;
 
     void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
+        if (S_Instance == null)
+            S_Instance = this;
+        else if (S_Instance != this)
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-	}
-
-	// Use this for initialization
-	void Start ()
-    {
-        muteMusic = PlayerPrefs.GetInt("MuteMusic") == 1 ? true : false;
-        muteEfx = PlayerPrefs.GetInt("MuteEfx") == 1 ? true : false;
-
-        PlayMusic(menuMusic);
     }
-	
-    public void PlayMusic(AudioClip clip)
-    {
-        if (muteMusic)
-            return;
 
-        musicSource.clip = clip;
-        if (!musicSource.isPlaying)
-            musicSource.Play();
+    // Use this for initialization
+    void Start()
+    {
+        _isMuteMusic = PlayerPrefs.GetInt("MuteMusic") == 1;
+        _isMuteEfx = PlayerPrefs.GetInt("MuteEfx") == 1;
+
+        ApplyMuteStatesToAudioSources();
+        PlayMusicClip(MenuMusicAudio);
+    }
+
+    public void PlayMusicClip(AudioClip clip)
+    {
+        _lastRequestedMusicAudio = clip;
+        if (_isMuteMusic)
+        {
+            MusicAudioSource.clip = clip;
+            MusicAudioSource.Pause();
+            return;
+        }
+
+        MusicAudioSource.clip = clip;
+        if (!MusicAudioSource.isPlaying)
+            MusicAudioSource.Play();
     }
 
     private void StopMusic()
     {
-        musicSource.Stop();
+        MusicAudioSource.Stop();
     }
 
-    public void PlayEffects(AudioClip clip)
+    public void PlayEffectsAudio(AudioClip clip)
     {
-        if (muteEfx)
+        if (_isMuteEfx)
             return;
-        
-        efxSource.PlayOneShot(clip);
+
+        EfxAudioSource.PlayOneShot(clip);
     }
 
-    public void MuteMusic()
+    public void MuteMusicEffect()
     {
-        if (muteMusic)
+        if (_isMuteMusic)
         {
-            muteMusic = false;
-            PlayMusic(menuMusic);
+            _isMuteMusic = false;
+            ApplyMuteStatesToAudioSources();
+            // resume last requested track or fallback to menu
+            PlayMusicClip(_lastRequestedMusicAudio != null ? _lastRequestedMusicAudio : MenuMusicAudio);
             PlayerPrefs.SetInt("MuteMusic", 0);
         }
         else
         {
-            muteMusic = true;
-            StopMusic();
+            _isMuteMusic = true;
+            ApplyMuteStatesToAudioSources();
+            MusicAudioSource.Pause();
             PlayerPrefs.SetInt("MuteMusic", 1);
         }
     }
 
     public void MuteEfx()
     {
-        if (muteEfx)
+        if (_isMuteEfx)
             PlayerPrefs.SetInt("MuteEfx", 0);
         else
             PlayerPrefs.SetInt("MuteEfx", 1);
 
-        muteEfx = !muteEfx;
+        _isMuteEfx = !_isMuteEfx;
+        ApplyMuteStatesToAudioSources();
     }
 
-    public bool IsMusicMute()
+    public bool IsMusicMuted()
     {
-        return muteMusic;
+        return _isMuteMusic;
     }
 
-    public bool IsEfxMute()
+    public bool IsEfxMuted()
     {
-        return muteEfx;
+        return _isMuteEfx;
+    }
+
+    private void ApplyMuteStatesToAudioSources()
+    {
+        if (MusicAudioSource != null)
+            MusicAudioSource.mute = _isMuteMusic;
+        if (EfxAudioSource != null)
+            EfxAudioSource.mute = _isMuteEfx;
     }
 }

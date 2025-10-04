@@ -2,16 +2,16 @@
 
 public class Side : MonoBehaviour
 {
-    Camera cam;
+    Camera _camera;
 
     void Start()
     {
-        cam = Camera.main;
+        _camera = Camera.main;
     }
 
     //side follow the camera on y axis
     void Update()
     {
-        transform.position = new Vector2(transform.position.x, cam.transform.position.y);
+        transform.position = new Vector2(transform.position.x, _camera.transform.position.y);
     }
 }
