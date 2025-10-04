@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0cd4119e22980454484d5124e96eb5e6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 198167
+  packageName: Jump Up - 2D Game Template
+  packageVersion: 1.1
+  assetPath: Assets/JumpUp/Scripts/Gameplay/Side.cs
+  uploadId: 533793

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c7bacbf62d0c64929a2ac809f46124b9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 198167
+  packageName: Jump Up - 2D Game Template
+  packageVersion: 1.1
+  assetPath: Assets/JumpUp/Scripts/Gameplay/CameraFollowTarget.cs
+  uploadId: 533793

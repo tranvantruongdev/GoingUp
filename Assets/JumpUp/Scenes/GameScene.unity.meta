@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0005492b555864686bc7a57242013da6
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 198167
+  packageName: Jump Up - 2D Game Template
+  packageVersion: 1.1
+  assetPath: Assets/JumpUp/Scenes/GameScene.unity
+  uploadId: 533793

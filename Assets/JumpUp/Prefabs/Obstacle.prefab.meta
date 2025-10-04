@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c26bb57f475b94732b973528de64c138
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 198167
+  packageName: Jump Up - 2D Game Template
+  packageVersion: 1.1
+  assetPath: Assets/JumpUp/Prefabs/Obstacle.prefab
+  uploadId: 533793

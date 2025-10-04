@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 07e9fd5dc2f2344b3ada0ca5f48aae27
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 198167
+  packageName: Jump Up - 2D Game Template
+  packageVersion: 1.1
+  assetPath: Assets/JumpUp/Animations/TapTitleAnimation.anim
+  uploadId: 533793
