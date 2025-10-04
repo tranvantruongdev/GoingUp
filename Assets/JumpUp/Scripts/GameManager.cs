@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (uIManager.gameState == GameState.PLAYING)
+        if (uIManager.gameState == GameStateEnum.RUNNING)
         {
             if (uIManager.IsButton())
                 return;
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
     //restart game, reset score, show player, open sides
     public void RestartGame()
     {
-        if (uIManager.gameState == GameState.PAUSED)
+        if (uIManager.gameState == GameStateEnum.PAUSED_GAME)
             Time.timeScale = 1;
 
         ClearScene();
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
     //show game over gui
     public void GameOver()
     {
-        if (uIManager.gameState == GameState.PLAYING)
+        if (uIManager.gameState == GameStateEnum.RUNNING)
         {
             ScoreManager.Instance.StopCounting();
             AudioManager.Instance.PlayEffects(AudioManager.Instance.gameOver);
