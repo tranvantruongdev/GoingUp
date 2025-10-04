@@ -43,6 +43,10 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusicClip(AudioClip clip)
     {
+        // Don't restart the same clip if it's already playing
+        if (MusicAudioSource.clip == clip && MusicAudioSource.isPlaying)
+            return;
+
         _lastRequestedMusicAudio = clip;
         if (_isMuteMusic)
         {
@@ -52,11 +56,10 @@ public class AudioManager : MonoBehaviour
         }
 
         MusicAudioSource.clip = clip;
-        if (!MusicAudioSource.isPlaying)
-            MusicAudioSource.Play();
+        MusicAudioSource.Play();
     }
 
-    private void StopMusic()
+    public void StopMusic()
     {
         MusicAudioSource.Stop();
     }

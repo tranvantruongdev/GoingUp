@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
         GameplayGuiGameObject.SetActive(true);
         GameOverGuiGameObject.SetActive(false);
         GameStateEnum = GameStateEnum.RUNNING;
-        AudioManager.S_Instance.PlayEffectsAudio(AudioManager.S_Instance.GameMusicAudio);
+        AudioManager.S_Instance.PlayMusicClip(AudioManager.S_Instance.GameMusicAudio);
     }
 
     //show game over gui
