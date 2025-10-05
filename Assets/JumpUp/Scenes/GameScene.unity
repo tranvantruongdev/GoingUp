@@ -1290,6 +1290,7 @@ MonoBehaviour:
   PauseGuiGameObject: {fileID: 2123322882}
   GameplayGuiGameObject: {fileID: 961859282}
   GameOverGuiGameObject: {fileID: 1106066563}
+  ShopUIInstance: {fileID: 0}
   GameStateEnum: 0
 --- !u!4 &1210228304
 Transform:
@@ -1433,7 +1434,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b2d28666f56f54ae4a344b08cf4fd89e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7eaef2405fca0b3418124669be0bcd7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2996,6 +2997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIManagerInstance: {fileID: 1210228303}
   ScoreManagerInstance: {fileID: 1662418496}
+  SkinSystemInstance: {fileID: 0}
   CameraGameObject: {fileID: 534669902}
   PlayerGameObject: {fileID: 1287695741}
   PlayerRigidbody2DInstance: {fileID: 1287695743}
