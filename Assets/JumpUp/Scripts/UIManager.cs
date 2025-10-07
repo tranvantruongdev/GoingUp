@@ -122,4 +122,16 @@ public class UIManager : MonoBehaviour
 
         return tmp;
     }
+
+    public void SetPauseGameForShop(bool isPaused)
+    {
+        if (isPaused)
+        {
+            GameStateEnum = GameStateEnum.PAUSED_GAME;
+        }
+        else
+        {
+            GameStateEnum = GameStateEnum.MAIN_MENU;
+        }
+    }
 }
