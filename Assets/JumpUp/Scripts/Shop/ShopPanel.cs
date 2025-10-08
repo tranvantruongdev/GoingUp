@@ -9,6 +9,8 @@ public class ShopPanel : MonoBehaviour
     public ShopItemView itemPrefab;
     public Button okButton;
     public Text scoreText;
+    [Header("Optional Preview")]
+    public PlayerSkinApplier previewApplier; // if assigned, selection previews skin visuals
 
     readonly List<ShopItemView> _items = new List<ShopItemView>();
     SkinData _pendingSelection;
@@ -121,6 +123,13 @@ public class ShopPanel : MonoBehaviour
         foreach (var item in _items)
             item.SetSelected(item.Skin == skin);
         UpdateOkButtonState();
+
+        // Preview selected skin (no persistence) if unlocked and previewApplier is set
+        if (previewApplier != null && SkinService.Instance != null && skin != null)
+        {
+            if (SkinService.Instance.IsUnlocked(skin))
+                previewApplier.ApplySkin(skin);
+        }
     }
 
     void UpdateOkButtonState()
