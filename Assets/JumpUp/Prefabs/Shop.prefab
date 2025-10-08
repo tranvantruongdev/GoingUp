@@ -732,6 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6076212589539571661}
   - component: {fileID: -4007776803893497484}
+  - component: {fileID: 5701628033874042764}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -786,6 +787,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5701628033874042764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6076212589539571660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7acb35f8f048c7046b87f5fbbfb49187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listRoot: {fileID: 7687837431877242680}
+  itemPrefab: {fileID: 1666742028959893945, guid: 8aa7126ad58066840a18179556c4b76a,
+    type: 3}
+  okButton: {fileID: 7715408675310461097}
+  scoreText: {fileID: 0}
 --- !u!1 &6076212589833929433
 GameObject:
   m_ObjectHideFlags: 0
