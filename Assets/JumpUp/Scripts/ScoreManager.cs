@@ -43,6 +43,12 @@ public class ScoreManager : MonoBehaviour
 
         _highScoreText.text = HighScoreCounter.ToString("F1");
         PlayerPrefs.SetFloat("HighScore", HighScoreCounter);
+        
+        // Notify SkinService for auto-unlock by score
+        if (SkinService.Instance != null)
+        {
+            SkinService.Instance.OnScoreCommitted((int)HighScoreCounter);
+        }
     }
 
     //update currentscore
