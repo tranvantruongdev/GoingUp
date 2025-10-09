@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c92e516f9beea4cab97303340f3b6d, type: 3}
   m_Name: OldSkin 1
   m_EditorClassIdentifier: 
-  id: 1
+  id: 3
   displayName: Default
   icon: {fileID: 21300000, guid: 58e276362ac93164dab904a5c28f9557, type: 3}
   requiredScore: 0

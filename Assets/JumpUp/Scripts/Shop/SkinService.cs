@@ -54,10 +54,10 @@ public class SkinService : MonoBehaviour
 
         LoadState();
 
-        // Ensure defaults are unlocked
+        // Unlock all skins from the beginning
         foreach (var skin in _allSkins)
         {
-            if (skin.isDefault && !string.IsNullOrEmpty(GetId(skin)))
+            if (!string.IsNullOrEmpty(GetId(skin)))
                 _unlockedIds.Add(GetId(skin));
         }
 
